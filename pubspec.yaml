@@ -43,6 +43,9 @@ dependencies:
   connectivity: ^3.0.6
   record: ^4.4.4
   audioplayers: ^5.1.0
+  firebase_core: ^2.16.0
+  google_sign_in: ^6.1.5
+  firebase_auth: ^4.10.0
 
 
 dev_dependencies:

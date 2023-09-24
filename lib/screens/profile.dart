@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:googles/repo/authService.dart';
+import 'package:googles/screens/loginScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Profile'),
@@ -13,14 +16,14 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           const SizedBox(height: 20.0),
-          const CircleAvatar(
+          CircleAvatar(
             radius: 70,
             backgroundImage: NetworkImage(
-                'https://example.com/your-profile-image-url.jpg'),
+                FirebaseAuth.instance.currentUser!.photoURL.toString()),
           ),
           const SizedBox(height: 20.0),
-          const Text(
-            'John Doe',
+          Text(
+            FirebaseAuth.instance.currentUser!.displayName.toString(),
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -35,17 +38,13 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20.0),
-          const ListTile(
-            leading: Icon(Icons.email),
-            title: Text('johndoe@example.com'),
+          ListTile(
+            leading: const Icon(Icons.email),
+            title: Text(FirebaseAuth.instance.currentUser!.email.toString()),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.phone),
-            title: Text('+1 (123) 456-7890'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.location_on),
-            title: Text('New York, USA'),
+            title: Text(FirebaseAuth.instance.currentUser!.phoneNumber ?? ""),
           ),
           const SizedBox(height: 20.0),
           ElevatedButton(
@@ -53,6 +52,18 @@ class ProfileScreen extends StatelessWidget {
               // Implement edit profile functionality
             },
             child: const Text('Edit Profile'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Implement edit profile functionality
+              authService.logout().then((value) => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  ));
+            },
+            child: const Text('Log out'),
           ),
         ],
       ),

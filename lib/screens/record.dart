@@ -44,7 +44,7 @@ class _RecordScreenState extends State<RecordScreen> {
               const SizedBox(
                 height: 25,
               ),
-              if (!isRecording && audioPath != null)
+              if (!isRecording)
                 ElevatedButton(
                     onPressed: playRecording,
                     child: const Text("Play Recording")),
