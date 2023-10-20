@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:googles/repo/apiCall.dart';
 import 'package:record/record.dart';
 
 class RecordScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _RecordScreenState extends State<RecordScreen> {
 
   @override
   void initState() {
+    ApiCall().fetchUsers();
     audioPlayer = AudioPlayer();
 
     audioRecord = Record();

@@ -18,12 +18,12 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 20.0),
           CircleAvatar(
             radius: 70,
-            backgroundImage: NetworkImage(
-                FirebaseAuth.instance.currentUser!.photoURL.toString()),
+            backgroundImage:
+                NetworkImage(FirebaseAuth.instance.currentUser?.photoURL ?? ""),
           ),
           const SizedBox(height: 20.0),
           Text(
-            FirebaseAuth.instance.currentUser!.displayName.toString(),
+            FirebaseAuth.instance.currentUser?.displayName ?? "",
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -40,22 +40,11 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 20.0),
           ListTile(
             leading: const Icon(Icons.email),
-            title: Text(FirebaseAuth.instance.currentUser!.email.toString()),
-          ),
-          ListTile(
-            leading: Icon(Icons.phone),
-            title: Text(FirebaseAuth.instance.currentUser!.phoneNumber ?? ""),
+            title: Text(FirebaseAuth.instance.currentUser?.email ?? ""),
           ),
           const SizedBox(height: 20.0),
           ElevatedButton(
             onPressed: () {
-              // Implement edit profile functionality
-            },
-            child: const Text('Edit Profile'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Implement edit profile functionality
               authService.logout().then((value) => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
